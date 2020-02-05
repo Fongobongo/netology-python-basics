@@ -1,54 +1,63 @@
 class Animal:
     food = 'fodder'
 
+
 class Eggs:
     utility = 'Собирать яйца'
+
 
 class Milk:
     utility = 'Доить'
 
+
 class Goose(Animal, Eggs):
+    sound = 'Ga-ga-ga'
 
     def __init__(self, name='Серый', weight=3):
         self.name = name
-        self.sound = 'Ga-ga-ga'
         self.weight = weight
 
+
 class Cow(Animal, Milk):
+    sound = 'Moooo'
 
     def __init__(self):
         self.name = 'Манька'
-        self.sound = 'Moooo'
-        self.weight = 450 # kg
+        self.weight = 450  # kg
+
 
 class Sheep(Animal):
     utility = 'Стричь'
+    sound = 'Mee'
 
     def __init__(self, name='Барашек', weight=120):
         self.name = name
-        self.sound = 'Mee'
         self.weight = weight
 
+
 class Hen(Animal, Eggs):
+    sound = 'Buc'
 
     def __init__(self, name='Ко-ко', weight=0.8):
         self.name = name
-        self.sound = 'Buc'
         self.weight = weight
 
+
 class Goat(Animal, Milk):
+    sound = 'Naa'
 
     def __init__(self, name='Рога', weight=100):
         self.name = name
-        self.sound = 'Naa'
         self.weight = weight
 
+
 class Duck(Animal, Eggs):
+    sound = 'Quack'
 
     def __init__(self):
         self.name = 'Кряква'
-        self.sound = 'Quack'
-        self.weight = 1.1 # kg
+        self.weight = 1.1  # kg
+
 
 goose1 = Goose()
 goose2 = Goose('Белый', 2.5)
