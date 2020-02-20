@@ -22,6 +22,7 @@ class Animal():
         print(f"Общий вес животных составляет {weight} кг.")
         print(f"Самое тяжелое животное - {top_weight_name}, весит {top_weight} кг.")
 
+
 class Eggs:
     utility = 'Собирать яйца'
 
