@@ -19,7 +19,7 @@ def add_dish(dish_name):
     return ingredients_list
 
 
-with open("recipes.txt") as file:
+with open("recipes.txt", encoding="utf-8-sig") as file:
     while True:
         new_dish = file.readline()
 
