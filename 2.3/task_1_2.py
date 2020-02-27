@@ -3,27 +3,33 @@ user_input = input("Введите польскую нотацию для дву
 operations = ['+', '-', '*', '/']
 
 
+class NotANumberError(Exception):
+    def __repr__(self):
+        return print("По крайней мере одно из введённых значений не является положительным числом.")
+
+
 def calculation(list_of_3):
+
     try:
-        try:
-            assert len(user_input) == 3
-        except AssertionError:
-            return print("Число введённых элементов не равно трём.")
 
-        try:
-            assert user_input[0] in operations
-        except AssertionError:
-            return print(f"Операция '{user_input[0]}' не поддерживается.")
+        operation = user_input[0]
+        number_1 = user_input[1].replace(".", "", 1)
+        number_2 = user_input[2].replace(".", "", 1)
 
-        try:
-            assert user_input[1].replace(".", "", 1).isdigit() & user_input[2].replace(".", "", 1).isdigit()
-        except AssertionError:
-            return print("По крайней мере одно из введённых значений не является положительным числом.")
-
-        return print(f"Ответ: {eval(user_input[1] + user_input[0] + user_input[2])}.")
-
+        assert operation in operations
+        if number_1.isdigit() & number_2.isdigit():
+            result = eval(number_1 + operation + number_2)
+            return print(f"Ответ: {number_1} {operation} {number_2} = {result}.")
+        else:
+            raise NotANumberError
+    except IndexError:
+        return print("Число введённых элементов меньше трёх.")
+    except AssertionError:
+        return print(f"Операция '{operation}' не поддерживается.")
     except ZeroDivisionError:
         return print("На 0 делить нельзя. Не в мою смену.")
+    except NotANumberError:
+        return print("По крайней мере одно из введённых значений не является положительным числом.")
 
 
 calculation(user_input)
