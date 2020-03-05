@@ -1,4 +1,5 @@
 import requests
+import glob
 
 
 def translate_it(from_file, to_file, from_lang, to_lang='ru'):
@@ -25,11 +26,11 @@ def translate_it(from_file, to_file, from_lang, to_lang='ru'):
     return
 
 
-def upload_to_yadisk(token):
+def upload_to_yadisk(token, filename):
     url = 'https://cloud-api.yandex.net/v1/disk/resources/upload'
 
     params = {
-        'path': 'translated.txt',
+        'path': filename,
         'overwrite': 'true'
     }
 
@@ -41,12 +42,15 @@ def upload_to_yadisk(token):
     response_json = response.json()
     upload_url = response_json['href']
 
-    with open('result.txt', 'rb') as result:
-        requests.put(upload_url, result)
+    with open(filename, 'rb') as file_to_upload:
+        requests.put(upload_url, file_to_upload)
 
     return
 
 
 if __name__ == '__main__':
-    translate_it('de.txt', 'result.txt', 'de')
-    upload_to_yadisk('INSERT YOUR TOKEN HERE')
+    for original_file in glob.glob('*.txt'):
+        file_lang = original_file[:-4].lower()
+        translated_file = f'translated_from_{file_lang}.txt'
+        translate_it(original_file, translated_file, file_lang)
+        upload_to_yadisk('AgAAAAAMkE0HAADLW1UZrj8lmEctpzTITFE2Rg8', translated_file)
